@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Hero Page</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Indicator -->
+    <div class="loading-indicator"></div>
+
+    <!-- Fixed Top Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Brand Logo - Unified Brand Identity (appears only once) -->
+            <div class="brand">
+                <a href="#" class="logo" aria-label="Home">
+                    <i class="fas fa-cube"></i>
+                    <span>BrandName</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-bar">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" placeholder="Search..." class="search-input" aria-label="Search">
+                        <button class="clear-search" aria-label="Clear Search">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Side Icons -->
+                <div class="nav-icons">
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" aria-label="Toggle Theme" data-tooltip="Toggle Theme">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <!-- Notifications -->
+                    <div class="notifications">
+                        <button class="notification-btn" aria-label="Notifications" data-tooltip="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <!-- Notification items will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile -->
+                    <div class="profile">
+                        <button class="profile-btn" aria-label="Profile Menu" data-tooltip="Profile">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile" class="avatar">
+                        </button>
+                        <div class="profile-dropdown">
+                            <div class="profile-info">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile" class="avatar-large">
+                                <div class="user-info">
+                                    <h4>John Doe</h4>
+                                    <p>john.doe@example.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-links">
+                                <a href="#" data-tooltip="View Profile"><i class="fas fa-user"></i> Profile</a>
+                                <a href="#" data-tooltip="Account Settings"><i class="fas fa-cog"></i> Settings</a>
+                                <a href="#" data-tooltip="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar" aria-expanded="false" aria-controls="sidebar">
+        <span class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </button>
+
+    <!-- Main Sidebar - No Brand Logo Here (unified brand identity) -->
+    <nav class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+        <!-- Sidebar Navigation Links -->
+        <ul class="nav-links" role="menu">
+            <li role="none">
+                <a href="#home" class="nav-link active" role="menuitem" aria-current="page">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li role="none">
+                <a href="#dashboard" class="nav-link" role="menuitem">
+                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li role="none">
+                <a href="#projects" class="nav-link" role="menuitem">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li role="none">
+                <a href="#analytics" class="nav-link" role="menuitem">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li role="none">
+                <a href="#settings" class="nav-link" role="menuitem">
+                    <i class="fas fa-cog" aria-hidden="true"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile" class="avatar">
+                <div class="user-details">
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section with Parallax -->
+        <section class="hero-section" id="home">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to Our Platform</h1>
+                <p class="hero-subtitle">Discover the power of modern design and seamless user experience</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hero Image" class="parallax-img">
+                </div>
+                <!-- 3D Decorative Elements -->
+                <div class="hero-decoration">
+                    <div class="decoration-circle"></div>
+                    <div class="decoration-square"></div>
+                    <div class="decoration-triangle"></div>
+                    <div class="decoration-dots"></div>
+                    <div class="decoration-lines"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section with Parallax -->
+        <section class="features-section" id="features">
+            <h2 class="section-title">Our Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Fast Performance</h3>
+                    <p>Lightning-fast loading times and smooth interactions for the best user experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Platform</h3>
+                    <p>Advanced security measures to protect your data and ensure privacy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Seamlessly adapts to any device, from mobile phones to large desktop screens.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Beautiful UI</h3>
+                    <p>Modern and clean interface with attention to detail and visual appeal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Glassmorphism Section with Parallax -->
+        <section class="glassmorphism-section" id="experience">
+            <div class="glass-card">
+                <h2>Experience the Future</h2>
+                <p>Our platform combines cutting-edge technology with intuitive design to deliver an unparalleled user experience.</p>
+                <button class="btn btn-primary">Explore Now</button>
+            </div>
+            <div class="glass-card">
+                <h2>Join Our Community</h2>
+                <p>Connect with like-minded individuals and share your experiences in our growing community.</p>
+                <button class="btn btn-secondary">Join Today</button>
+            </div>
+        </section>
+
+        <!-- Interactive Showcase Section -->
+        <section class="showcase-section" id="showcase">
+            <h2 class="section-title">Interactive Showcase</h2>
+            <div class="showcase-container">
+                <div class="showcase-item">
+                    <div class="showcase-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Clean Code</h3>
+                    <p>Well-structured, maintainable code that follows best practices.</p>
+                </div>
+                <div class="showcase-item">
+                    <div class="showcase-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Beautiful Design</h3>
+                    <p>Visually stunning interfaces with attention to every detail.</p>
+                </div>
+                <div class="showcase-item">
+                    <div class="showcase-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>High Performance</h3>
+                    <p>Optimized for speed and efficiency across all devices.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Spacer for Demonstration -->
+        <div class="content-spacer"></div>
+    </main>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container"></div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html> 
