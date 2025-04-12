@@ -3,6 +3,17 @@
 // Initialize GSAP
 gsap.registerPlugin(ScrollTrigger);
 
+// DOM Elements
+const loadingIndicator = document.querySelector('.loading-indicator');
+const navbar = document.querySelector('.navbar');
+const sidebarToggle = document.querySelector('.sidebar-toggle');
+const sidebar = document.querySelector('.sidebar');
+const themeToggle = document.querySelector('.theme-toggle');
+const searchInput = document.querySelector('.search-input');
+const clearSearch = document.querySelector('.clear-search');
+const notificationBtn = document.querySelector('.notification-btn');
+const profileBtn = document.querySelector('.profile-btn');
+
 // Form Validation and Submission
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.querySelector('.contact-form');
@@ -255,62 +266,83 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Loading Indicator
-document.addEventListener('DOMContentLoaded', () => {
-    const loadingIndicator = document.querySelector('.loading-indicator');
-    
-    // Hide loading indicator after page load
-    window.addEventListener('load', () => {
-        loadingIndicator.style.opacity = '0';
-        setTimeout(() => {
-            loadingIndicator.style.display = 'none';
-        }, 500);
-    });
+window.addEventListener('load', () => {
+    loadingIndicator.style.opacity = '0';
+    setTimeout(() => {
+        loadingIndicator.style.display = 'none';
+    }, 300);
 });
 
-// Theme Toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const themeToggle = document.querySelector('.theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    // Set initial theme
-    if (prefersDarkScheme.matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
     }
-    
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        
-        // Animate theme toggle icon
-        gsap.to(themeToggle, {
-            rotation: 360,
-            duration: 0.5,
-            ease: 'power2.out'
-        });
-    });
 });
 
 // Sidebar Toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const sidebarToggle = document.querySelector('.sidebar-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    
-    sidebarToggle.addEventListener('click', () => {
-        const isExpanded = sidebarToggle.getAttribute('aria-expanded') === 'true';
-        sidebarToggle.setAttribute('aria-expanded', !isExpanded);
-        sidebar.classList.toggle('active');
-        mainContent.classList.toggle('sidebar-active');
-        
-        // Animate sidebar
-        gsap.to(sidebar, {
-            x: isExpanded ? '-100%' : '0',
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-    });
+sidebarToggle.addEventListener('click', () => {
+    const isExpanded = sidebarToggle.getAttribute('aria-expanded') === 'true';
+    sidebarToggle.setAttribute('aria-expanded', !isExpanded);
+    sidebar.classList.toggle('active');
 });
+
+// Close sidebar when clicking outside
+document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+
+// Theme Toggle
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+});
+
+// Search Functionality
+searchInput.addEventListener('input', () => {
+    clearSearch.style.display = searchInput.value ? 'block' : 'none';
+});
+
+clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearch.style.display = 'none';
+    searchInput.focus();
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.notifications')) {
+        document.querySelector('.notification-dropdown')?.classList.remove('show');
+    }
+    if (!e.target.closest('.profile')) {
+        document.querySelector('.profile-dropdown')?.classList.remove('show');
+    }
+});
+
+// Notification Toggle
+notificationBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = document.querySelector('.notification-dropdown');
+    dropdown.classList.toggle('show');
+});
+
+// Profile Toggle
+profileBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = document.querySelector('.profile-dropdown');
+    dropdown.classList.toggle('show');
+});
+
+// Initialize theme from localStorage
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
 
 // Enhanced Animations with GSAP
 document.addEventListener('DOMContentLoaded', () => {

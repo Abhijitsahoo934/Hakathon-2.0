@@ -35,21 +35,22 @@ function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.body.classList.add('dark-theme');
+        document.documentElement.setAttribute('data-theme', 'dark');
     }
 }
 
 function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    const isDark = document.body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
     
     // Add animation class
     themeToggle.classList.add('theme-transition');
     setTimeout(() => themeToggle.classList.remove('theme-transition'), 500);
     
     // Show toast notification
-    showToast('Theme Changed', `Switched to ${isDark ? 'dark' : 'light'} mode`, isDark ? 'moon' : 'sun');
+    showToast('Theme Changed', `Switched to ${newTheme} mode`, newTheme === 'dark' ? 'moon' : 'sun');
 }
 
 // Navbar Scroll Behavior
@@ -495,4 +496,22 @@ function init() {
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', init); 
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    
+    // Add theme toggle event listener
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    // Add event listeners for other functionality
+    sidebarToggle.addEventListener('click', toggleSidebar);
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    searchInput.addEventListener('input', handleSearch);
+    clearSearchBtn.addEventListener('click', clearSearch);
+    notificationBtn.addEventListener('click', toggleNotifications);
+    profileBtn.addEventListener('click', toggleProfile);
+    
+    // Initialize other features
+    loadNotifications();
+    setActiveLink();
+    animateFeatureCards();
+}); 
